@@ -26,7 +26,7 @@ function Empty({ icon, title, description }: Props) {
                 )
             }
         </EmptyStyle>
-    )
+    );
 }
 
 const EmptyStyle = styled.div`
