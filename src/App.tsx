@@ -13,6 +13,7 @@ import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/api/queryClient";
+import ThemeSwitcher from "@/components/header/ThemeSwitcher";
 
 const routeList = [
     {
