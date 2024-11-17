@@ -5,6 +5,7 @@ import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../api/carts.api";
 import { addBookReview, fetchBookReview } from "@/api/review.api";
+import { useToast } from "@/hooks/useToast";
 
 export const useBook = (bookId: string | undefined) => {
     const [book, setBook] = useState<BookDetail | null>(null);
@@ -13,6 +14,8 @@ export const useBook = (bookId: string | undefined) => {
 
     const { isLoggedIn } = useAuthStore();
     const { showAlert } = useAlert();
+
+    const { showToast } = useToast();
 
     const likeToggle = () => {
         // 권한 확인
@@ -29,7 +32,8 @@ export const useBook = (bookId: string | undefined) => {
                     ...book,
                     liked: false,
                     likes: book.likes - 1
-                })
+                });
+                showToast("좋아요가 취소되었습니다.");
             });
         } else {
             likeBook(book.id).then(() => {
@@ -37,10 +41,11 @@ export const useBook = (bookId: string | undefined) => {
                     ...book,
                     liked: true,
                     likes: book.likes + 1
-                })
-            })
+                });
+                showToast("좋아요를 성공했습니다.");
+            });
         }
-    }
+    };
 
     const addToCart = (quantity: number) => {
         if (!book) return;
