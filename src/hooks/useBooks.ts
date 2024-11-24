@@ -8,16 +8,19 @@ export const useBooks = () => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
 
-    const { data: booksData, isLoading: isBooksLoading } = useQuery(["books", location.search], () => fetchBooks({
-        category_id: params.get(QUERYSTRING.CATEGORY_ID) ?
-            Number(params.get(QUERYSTRING.CATEGORY_ID)) :
-            undefined,
-        news: params.get(QUERYSTRING.NEWS) ? true :
-            undefined,
-        currentPage: params.get(QUERYSTRING.PAGE) ?
-            Number(params.get(QUERYSTRING.PAGE)) : 1,
-        limit: LIMIT
-    }));
+    const { data: booksData, isLoading: isBooksLoading } =
+    useQuery(["books", location.search], () =>
+        fetchBooks({
+            category_id: params.get(QUERYSTRING.CATEGORY_ID) ?
+                Number(params.get(QUERYSTRING.CATEGORY_ID)) :
+                undefined,
+            news: params.get(QUERYSTRING.NEWS) ? true :
+                undefined,
+            currentPage: params.get(QUERYSTRING.PAGE) ?
+                Number(params.get(QUERYSTRING.PAGE)) : 1,
+            limit: LIMIT
+        })
+    );
 
     return {
         books: booksData?.books,
