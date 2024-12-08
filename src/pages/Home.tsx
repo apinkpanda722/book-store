@@ -3,9 +3,10 @@ import MainReview from "@/components/main/MainReview";
 import { useMain } from "@/hooks/useMain";
 import Title from "@/components/common/Title";
 import MainNewBooks from "@/components/main/MainNewBooks";
+import MainBest from "@/components/main/MainBest";
 
 function Home() {
-    const { reviews, newBooks } = useMain();
+    const { reviews, newBooks, bestBooks } = useMain();
 
     return (
         <HomeStyle>
@@ -14,6 +15,7 @@ function Home() {
             {/* 베스트셀러*/}
             <section className="section">
                 <Title size="large">베스트 셀러</Title>
+                <MainBest books={bestBooks} />
             </section>
 
             {/* 신간  */}
@@ -31,6 +33,14 @@ function Home() {
     )
 }
 
-const HomeStyle = styled.div``;
+const HomeStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    
+    .section > *:not(:last-child) {
+        margin-bottom: 16px;
+    }
+`;
 
 export default Home;
